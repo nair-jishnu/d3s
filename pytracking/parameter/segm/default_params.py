@@ -95,7 +95,7 @@ def parameters():
 
     params.use_segmentation = True
 
-    params.segm_net_path = '/home/alan/workspace/D3S-git/pytracking/networks/SegmNet.pth.tar'
+    params.segm_net_path = 'C:/Users/Dell/Desktop/SegmNet.pth.tar'
     params.segm_use_dist = True
     params.segm_normalize_mean = [0.485, 0.456, 0.406]
     params.segm_normalize_std = [0.229, 0.224, 0.225]
@@ -123,9 +123,9 @@ def parameters():
     params.init_segm_mask_thr = 0.5
     params.segm_mask_thr = 0.5
 
-    params.masks_save_path = ''
-    # params.masks_save_path = 'save-masks-path'
-    params.save_mask = False
+    # params.masks_save_path = 'C:/Users/Dell/Desktop/mask/'
+    params.masks_save_path = r'C:\Users\Dell\Desktop\d3s\pytracking\save-mask-path'
+    params.save_mask = True
     if params.masks_save_path != '':
         params.save_mask = True
 
