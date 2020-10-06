@@ -2,9 +2,35 @@ import os
 
 import cv2
 import numpy as np
+from glob import glob 
+def save_video():
+    text_file = open("boxes.txt", "r")
+    lines = text_file.readlines()
+
+    img_array = []
+    for j , i in enumerate(sorted(glob(r"C:\Users\Dell\Desktop\d3s\pytracking\save-mask-path\sequence1\*"))):
+        img = cv2.imread(i)
+        try:
+            state = lines [j]
+            state_1= state.split(",")
+            cv2.rectangle(img, (int(state_1[0][1:]), int(state_1[1])), (int(state_1[2]) + int(state_1[0][1:]), int(state_1[3][:-2]) + int(state_1[1])),(0, 255, 0), 5)
+        except:
+            pass
+        height, width, layers = img.shape
+        size = (width,height)
+        img_array.append(img)
+        
+    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+    out = cv2.VideoWriter('./output1.mp4', fourcc, 10, size)
+    
+    for i in range(len(img_array)):
+        out.write(img_array[i])
+    out.release()
+
+def save_mask(image,mask, mask_real, segm_crop_sz, bb, img_w, img_h, masks_save_path, sequence_name, frame_name):
 
 
-def save_mask(mask, mask_real, segm_crop_sz, bb, img_w, img_h, masks_save_path, sequence_name, frame_name):
+
     if mask is not None:
         M_sel = cv2.dilate(mask, np.ones((7, 7), np.uint8), iterations=1)
         mask_resized = (cv2.resize((M_sel * mask_real).astype(np.float32), (segm_crop_sz, segm_crop_sz),
@@ -54,4 +80,11 @@ def save_mask(mask, mask_real, segm_crop_sz, bb, img_w, img_h, masks_save_path, 
     if not os.path.exists(mask_save_dir):
         os.mkdir(mask_save_dir)
     mask_save_path = os.path.join(mask_save_dir, '%s.png' % frame_name)
+
     cv2.imwrite(mask_save_path, image_mask)
+    img_mask_save = cv2.imread(mask_save_path)
+    result = cv2.bitwise_or(image, img_mask_save)
+    cv2.imwrite(mask_save_path, result)
+
+
+    return result
