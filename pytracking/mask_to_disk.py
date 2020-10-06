@@ -81,7 +81,7 @@ def save_mask(image,mask, mask_real, segm_crop_sz, bb, img_w, img_h, masks_save_
         os.mkdir(mask_save_dir)
     mask_save_path = os.path.join(mask_save_dir, '%s.png' % frame_name)
 
-    cv2.imwrite(mask_save_path, image_mask)
+    cv2.imwrite(mask_save_path, image_mask*255)
     img_mask_save = cv2.imread(mask_save_path)
     result = cv2.bitwise_or(image, img_mask_save)
     cv2.imwrite(mask_save_path, result)
