@@ -2,8 +2,6 @@
 
 Python (PyTorch) implementation of the D3S tracker, presented at CVPR 2020.
 
-# Source - Alan Lukežič, Jiří Matas and Matej Kristan.
-
 ## Publication:
 Alan Lukežič, Jiří Matas and Matej Kristan.
 <b>D3S - A Discriminative Single Shot Segmentation Tracker.</b>
@@ -77,6 +75,8 @@ This is a modified version of the python framework pytracking based on **PyTorch
 
 ## Video
 Check out the [video](https://www.youtube.com/watch?v=E3mN_hCRHu0) with tracking and segmentation results of the D3S tracker.
+
+## Primary Source - Alan Lukežič, Jiří Matas and Matej Kristan.
 
 ## Contact
 * Alan Lukežič (email: alan.lukezic@fri.uni-lj.si)
