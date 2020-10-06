@@ -31,7 +31,7 @@ class BaseTracker:
 
         times = []
         start_time = time.time()
-        #self.sequence_name = sequence.name
+        self.sequence_name = sequence.name
         self.initialize(image, sequence.init_state)
         init_time = getattr(self, 'time', time.time() - start_time)
         times.append(init_time)
@@ -58,6 +58,7 @@ class BaseTracker:
 
     def track_videofile(self, videofilepath, optional_box=None):
         """Run track with a video file input."""
+        a = open('boxes.txt', 'w')
 
         assert os.path.isfile(videofilepath), "Invalid param {}".format(videofilepath)
         ", videofilepath must be a valid videofile"
@@ -90,7 +91,6 @@ class BaseTracker:
                 init_state = [x, y, w, h]
                 self.initialize(frame, init_state)
                 break
-
         while True:
             ret, frame = cap.read()
 
@@ -102,6 +102,10 @@ class BaseTracker:
             # Draw box
             state = self.track(frame)
             state = [int(s) for s in state]
+
+            a.write('{}'.format(state)+"\n")
+            
+
             cv.rectangle(frame_disp, (state[0], state[1]), (state[2] + state[0], state[3] + state[1]),
                          (0, 255, 0), 5)
 
@@ -129,8 +133,9 @@ class BaseTracker:
                 x, y, w, h = cv.selectROI(display_name, frame_disp, fromCenter=False)
                 init_state = [x, y, w, h]
                 self.initialize(frame, init_state)
-
+        a.close()
         # When everything done, release the capture
+
         cap.release()
         cv.destroyAllWindows()
 
