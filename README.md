@@ -2,6 +2,8 @@
 
 Python (PyTorch) implementation of the D3S tracker, presented at CVPR 2020.
 
+# Source - Alan Lukežič, Jiří Matas and Matej Kristan.
+
 ## Publication:
 Alan Lukežič, Jiří Matas and Matej Kristan.
 <b>D3S - A Discriminative Single Shot Segmentation Tracker.</b>
@@ -51,6 +53,12 @@ conda activate pytracking
 cd pytracking
 python run_tracker.py segm default_params --dataset vot18 --sequence <seq_name> --debug 1
 ```
+### Testing on random video -
+To test the algorithm on a random video run the following command.
+```bash
+python run_video.py segm default_params <path to video>
+```
+Output file (.mp4) will download within the pytracking folder 
 
 ### Evaluate the tracker using VOT
 We provide a VOT Matlab toolkit integration for the D3S tracker. There is the `tracker_D3S.m` Matlab file in the `pytracking/utils`, which can be connected with the toolkit. It uses the `vot_wrapper.py` script to integrate the tracker to the toolkit.
